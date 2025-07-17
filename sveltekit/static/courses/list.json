@@ -1,0 +1,4 @@
+[
+  {"id": "course1", "name": "Sample Course 1", "centroid": [ -122.0, 37.0 ]},
+  {"id": "course2", "name": "Sample Course 2", "centroid": [ -123.0, 38.0 ]}
+]

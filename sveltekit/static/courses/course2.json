@@ -1,0 +1,15 @@
+{
+  "name": "Sample Course 2",
+  "holes": 18,
+  "centroid": [-123.0, 38.0],
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.0, 38.0]
+      },
+      "properties": { "name": "Tee 1" }
+    }
+  ]
+}
