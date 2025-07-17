@@ -1,90 +1,28 @@
-<script>
-  import { onMount } from 'svelte';
-  import { init3D } from '$lib/legacy/3dplanner.js';
-  import { apiKeys } from '$lib/stores/apiKeys.js';
-  let container;
-  export let dataMode = 'distance';
-  export let courseData = null;
+import { Viewer, MapboxStyleImageryProvider, OpenStreetMapImageryProvider, GeoJsonDataSource, createWorldTerrain } from 'cesium';
+import 'cesium/Build/Cesium/Widgets/widgets.css';
 
-  let viewer;
+export function init3D(container, mode, courseData, keys) {
+  container.innerHTML = '';
 
-  onMount(() => {
+  const imageryProvider = keys.mapbox
+    ? new MapboxStyleImageryProvider({ styleId: 'streets-v11', accessToken: keys.mapbox })
+    : new OpenStreetMapImageryProvider({ url: 'https://a.tile.openstreetmap.org/' });
 
-  function loadViewer() {
-
-    let keys;
-    const unsub = apiKeys.subscribe((k) => (keys = k));
-    unsub();
-    viewer = init3D(container, dataMode, courseData, keys);
-
+  const viewer = new Viewer(container, {
+    imageryProvider,
+    terrainProvider: createWorldTerrain(),
+    baseLayerPicker: false
   });
-</script>
 
-<div bind:this={container} class="map3d"></div>
-
-<style>
-  .map3d { width: 100%; height: 400px; }
-
+  if (courseData?.features) {
+    GeoJsonDataSource.load({
+      type: 'FeatureCollection',
+      features: courseData.features
+    }).then(ds => {
+      viewer.dataSources.add(ds);
+      viewer.zoomTo(ds);
+    });
   }
 
-  onMount(() => {
-    if (courseData) loadViewer();
-  });
-
-  $: if (container && courseData && dataMode) {
-    loadViewer();
-  }
-</script>
-
-<div bind:this={container} class="map3d"></div>
-  let container;
-  export let dataMode = 'distance';
-  export let courseData = null;
-  export let wind = null;
-  onMount(() => {
-    let keys;
-    const unsub = apiKeys.subscribe((k) => (keys = k));
-    unsub();
-  let container;
-  export let dataMode = 'distance';
-  export let courseData = null;
-  onMount(() => {
-    let keys;
-    apiKeys.subscribe(k => (keys = k))();
-    init3D(container, dataMode, courseData, keys);
-  });
-</script>
-
-<div bind:this={container} class="map3d">
-  Loading 3D map... ({dataMode})
-  {#if wind}
-    <div class="wind" style="transform: rotate({wind.deg}deg);">↑</div>
-  {/if}
-</div>
-  let container;
-  export let dataMode = 'distance';
-  onMount(() => {
-    init3D(container, dataMode);
-  });
-</script>
-
-<div bind:this={container} class="map3d">Loading 3D map... ({dataMode})</div>
-
-<style>
-.map3d {
-  width: 100%;
-  height: 400px;
-  background: #fee;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #555;
-  position: relative;
+  return viewer;
 }
-.wind {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-}
-
-</style>
