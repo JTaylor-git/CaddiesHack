@@ -1,10 +1,14 @@
 <script>
   import { onMount } from 'svelte';
   import { initPlanner } from '$lib/legacy/2dplanner';
+  import { apiKeys } from '$lib/stores/apiKeys';
   let container;
   export let dataMode = 'distance';
+  export let courseData = null;
   onMount(() => {
-    initPlanner(container, dataMode);
+    let keys;
+    apiKeys.subscribe(k => (keys = k))();
+    initPlanner(container, dataMode, courseData, keys);
   });
 </script>
 

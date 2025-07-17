@@ -3,9 +3,10 @@
 This folder contains the initial skeleton for migrating the legacy planner
 to a modern SvelteKit project.
 
-The planner page now includes toggles for 2D vs 3D map views and distance vs
-dispersion modes. API keys for basemaps and weather are stored in localStorage
-via a modal prompt on first load.
+The planner page includes a toolbar for switching between 2D and 3D views and
+distance or dispersion data modes. API keys for Mapbox, Esri and OpenWeatherMap
+are saved in localStorage and prompted via a modal on first launch. A side drawer
+lists holes and displays the current wind conditions.
 
 ## Available Routes
 

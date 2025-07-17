@@ -1,19 +1,15 @@
 <script>
   import { apiKeys } from '$lib/stores/apiKeys';
-  import { onMount } from 'svelte';
+  export let open = false;
   let localKeys = { mapbox: '', openweather: '', esri: '' };
-  let show = false;
-  const unsubscribe = apiKeys.subscribe(k => localKeys = { ...k });
-  onMount(() => {
-    if (!localKeys.mapbox) show = true;
-  });
+  apiKeys.subscribe(k => (localKeys = { ...k }));
   function save() {
     apiKeys.set(localKeys);
-    show = false;
+    open = false;
   }
 </script>
 
-{#if show}
+{#if open}
 <div class="modal">
   <div class="dialog">
     <h2>Enter API Keys</h2>
