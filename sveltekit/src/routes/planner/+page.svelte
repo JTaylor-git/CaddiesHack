@@ -44,6 +44,9 @@
   </div>
 
 {#if viewMode === '2d'}
+  <Map2D {dataMode} {courseData} wind={weather ? weather.wind : null} />
+{:else}
+  <Map3D {dataMode} {courseData} wind={weather ? weather.wind : null} />
   <Map2D {dataMode} {courseData} />
 {:else}
   <Map3D {dataMode} {courseData} />
@@ -70,6 +73,7 @@
       {/each}
     </ul>
     {#if weather}
+      <p>Wind: {weather.wind.speed} m/s</p>
       <p>Wind: {weather.wind.speed} m/s 
         <span style="display:inline-block; transform:rotate({weather.wind.deg}deg);">↑</span>
       </p>

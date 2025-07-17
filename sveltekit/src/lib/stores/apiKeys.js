@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 
+const defaultKeys = { mapbox: '', openweather: '', esri: '', opentopo: '' };
 const defaultKeys = { mapbox: '', openweather: '', esri: '' };
 
 function createStore() {

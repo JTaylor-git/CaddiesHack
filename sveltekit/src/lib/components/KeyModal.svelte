@@ -1,6 +1,7 @@
 <script>
   import { apiKeys } from '$lib/stores/apiKeys';
   export let open = false;
+  let localKeys = { mapbox: '', openweather: '', esri: '', opentopo: '' };
   let localKeys = { mapbox: '', openweather: '', esri: '' };
   apiKeys.subscribe(k => (localKeys = { ...k }));
   function save() {
@@ -35,6 +36,9 @@
     </label>
     <label>Esri
       <input bind:value={localKeys.esri} placeholder="Esri key" />
+    </label>
+    <label>OpenTopo
+      <input bind:value={localKeys.opentopo} placeholder="OpenTopo key" />
     </label>
     <button on:click={save}>Save</button>
   </div>

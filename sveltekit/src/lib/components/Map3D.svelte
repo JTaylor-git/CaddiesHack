@@ -1,6 +1,11 @@
 <script>
   import { onMount } from 'svelte';
   import { init3D } from '$lib/legacy/3dplanner';
+  import { apiKeys } from '$lib/stores/apiKeys';
+  let container;
+  export let dataMode = 'distance';
+  export let courseData = null;
+  export let wind = null;
   let container;
   export let dataMode = 'distance';
   export let courseData = null;
@@ -8,6 +13,15 @@
     let keys;
     apiKeys.subscribe(k => (keys = k))();
     init3D(container, dataMode, courseData, keys);
+  });
+</script>
+
+<div bind:this={container} class="map3d">
+  Loading 3D map... ({dataMode})
+  {#if wind}
+    <div class="wind" style="transform: rotate({wind.deg}deg);">↑</div>
+  {/if}
+</div>
   let container;
   export let dataMode = 'distance';
   onMount(() => {
@@ -26,5 +40,11 @@
   align-items: center;
   justify-content: center;
   color: #555;
+  position: relative;
+}
+.wind {
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
 </style>
