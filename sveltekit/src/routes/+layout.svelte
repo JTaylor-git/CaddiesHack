@@ -14,3 +14,7 @@
 
 <slot />
 <KeyModal bind:open={modalOpen} />
+</script>
+
+<slot />
+<KeyModal />

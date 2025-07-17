@@ -1,7 +1,6 @@
 <script>
   import { onMount } from 'svelte';
   import { init3D } from '$lib/legacy/3dplanner';
-  import { apiKeys } from '$lib/stores/apiKeys';
   let container;
   export let dataMode = 'distance';
   export let courseData = null;
@@ -9,6 +8,10 @@
     let keys;
     apiKeys.subscribe(k => (keys = k))();
     init3D(container, dataMode, courseData, keys);
+  let container;
+  export let dataMode = 'distance';
+  onMount(() => {
+    init3D(container, dataMode);
   });
 </script>
 
