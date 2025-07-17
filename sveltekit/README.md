@@ -12,6 +12,7 @@ The planner page now includes toggles for 2D vs 3D map views and distance vs
 dispersion modes. API keys for basemaps and weather are stored in localStorage
 via a modal prompt on first load.
 
+
 ## Available Routes
 
 - `/planner` – unified 2D/3D planner

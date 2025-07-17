@@ -74,11 +74,13 @@
     </ul>
     {#if weather}
       <p>Wind: {weather.wind.speed} m/s</p>
+
       <p>Wind: {weather.wind.speed} m/s 
         <span style="display:inline-block; transform:rotate({weather.wind.deg}deg);">↑</span>
       </p>
     {#if weather}
       <p>Wind: {weather.wind.speed} m/s ↑ <span style="display:inline-block; transform:rotate({weather.wind.deg}deg);">&#8593;</span></p>
+
     {/if}
   {/if}
 </Drawer>
@@ -108,3 +110,4 @@
 
 
 <h1>Planner</h1>
+
