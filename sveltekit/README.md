@@ -21,4 +21,5 @@ npm install
 npm run dev -- --open
 ```
 
-(Current environment may restrict installing packages.)
+Run `npm run build` to create a production build.
+
