@@ -1,9 +1,10 @@
 <script>
   import { onMount } from 'svelte';
-  import { initPlanner } from '$lib/legacy/2dplanner';
-  import { apiKeys } from '$lib/stores/apiKeys';
   import L from 'leaflet';
   import 'leaflet/dist/leaflet.css';
+  import { initPlanner } from '$lib/legacy/2dplanner.js';
+  import { apiKeys } from '$lib/stores/apiKeys.js';
+
 
   let container;
   export let dataMode = 'distance';
@@ -12,12 +13,14 @@
 
   let map;
   let windMarker;
-
-  function loadMap() {
+  onMount(() => {
+    // grab keys once
     let keys;
     const unsub = apiKeys.subscribe((k) => (keys = k));
     unsub();
     map = initPlanner(container, dataMode, courseData, keys);
+  });
+
   }
 
   onMount(() => {
@@ -32,6 +35,16 @@
     if (windMarker) {
       map.removeLayer(windMarker);
     }
+
+    const arrowHtml = `
+      <div style="
+        transform: rotate(${wind.deg}deg);
+        font-size: 24px;
+        color: red;
+        text-shadow: 0 0 2px #000;
+      ">
+        &#8593;
+      </div>`;
     const arrowHtml = `\n      <div style="\n        transform: rotate(${wind.deg}deg);\n        font-size: 24px;\n        color: red;\n        text-shadow: 0 0 2px #000;\n      ">\u2191</div>`;
 
     const icon = L.divIcon({
@@ -50,6 +63,9 @@
 </script>
 
 <div bind:this={container} class="map2d"></div>
+
+<style>
+  .map2d { width: 100%; height: 400px; }
   onMount(() => {
     let keys;
     const unsub = apiKeys.subscribe((k) => (keys = k));

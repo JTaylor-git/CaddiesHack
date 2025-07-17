@@ -62,6 +62,7 @@
   <Map2D {dataMode} />
 {:else}
   <Map3D {dataMode} />
+
 {/if}
 
 <Drawer open={drawerOpen}>
@@ -75,11 +76,13 @@
     {#if weather}
       <p>Wind: {weather.wind.speed} m/s</p>
 
+
       <p>Wind: {weather.wind.speed} m/s 
         <span style="display:inline-block; transform:rotate({weather.wind.deg}deg);">↑</span>
       </p>
     {#if weather}
       <p>Wind: {weather.wind.speed} m/s ↑ <span style="display:inline-block; transform:rotate({weather.wind.deg}deg);">&#8593;</span></p>
+
     {/if}
   {/if}
 </Drawer>
@@ -92,7 +95,7 @@
   font-weight: bold;
 }
 </style>
-=======
+
 .controls button {
   margin-right: 0.5rem;
 }
@@ -109,4 +112,5 @@
 
 
 <h1>Planner</h1>
+
 
