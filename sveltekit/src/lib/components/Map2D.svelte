@@ -6,6 +6,10 @@
   export let dataMode = 'distance';
   export let courseData = null;
   export let wind = null;
+  onMount(() => {
+    let keys;
+    const unsub = apiKeys.subscribe((k) => (keys = k));
+    unsub();
   let container;
   export let dataMode = 'distance';
   export let courseData = null;

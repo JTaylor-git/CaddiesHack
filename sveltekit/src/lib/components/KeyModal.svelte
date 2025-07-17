@@ -2,6 +2,8 @@
   import { apiKeys } from '$lib/stores/apiKeys';
   export let open = false;
   let localKeys = { mapbox: '', openweather: '', esri: '', opentopo: '' };
+  const unsub = apiKeys.subscribe((k) => (localKeys = { ...k }));
+  unsub();
   let localKeys = { mapbox: '', openweather: '', esri: '' };
   apiKeys.subscribe(k => (localKeys = { ...k }));
   function save() {
