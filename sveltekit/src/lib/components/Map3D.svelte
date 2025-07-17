@@ -1,28 +1,27 @@
-import { Viewer, MapboxStyleImageryProvider, OpenStreetMapImageryProvider, GeoJsonDataSource, createWorldTerrain } from 'cesium';
-import 'cesium/Build/Cesium/Widgets/widgets.css';
+<script>
+  import { onMount } from 'svelte';
+  import { init3D } from '$lib/legacy/3dplanner.js';
+  import { apiKeys } from '$lib/stores/apiKeys.js';
 
-export function init3D(container, mode, courseData, keys) {
-  container.innerHTML = '';
+  let container;
+  export let dataMode = 'distance';
+  export let courseData = null;
 
-  const imageryProvider = keys.mapbox
-    ? new MapboxStyleImageryProvider({ styleId: 'streets-v11', accessToken: keys.mapbox })
-    : new OpenStreetMapImageryProvider({ url: 'https://a.tile.openstreetmap.org/' });
+  let viewer;
 
-  const viewer = new Viewer(container, {
-    imageryProvider,
-    terrainProvider: createWorldTerrain(),
-    baseLayerPicker: false
+  onMount(() => {
+    let keys;
+    const unsub = apiKeys.subscribe(k => (keys = k));
+    unsub();
+    viewer = init3D(container, dataMode, courseData, keys);
   });
+</script>
 
-  if (courseData?.features) {
-    GeoJsonDataSource.load({
-      type: 'FeatureCollection',
-      features: courseData.features
-    }).then(ds => {
-      viewer.dataSources.add(ds);
-      viewer.zoomTo(ds);
-    });
+<div bind:this={container} class="map3d"></div>
+
+<style>
+  .map3d {
+    width: 100%;
+    height: 400px;
   }
-
-  return viewer;
-}
+</style>
