@@ -19,4 +19,9 @@
     "chartjs-plugin-annotation": "^3.0.0",
     "leaflet": "^1.9.4"
   }
+
+  ,
+  "dependencies": {
+    "chart.js": "^4.0.0"
+  }
 }
