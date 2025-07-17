@@ -20,4 +20,9 @@
     "leaflet": "^1.9.4",
     "cesium": "^1.118.1"
   }
+
+  ,
+  "dependencies": {
+    "chart.js": "^4.0.0"
+  }
 }

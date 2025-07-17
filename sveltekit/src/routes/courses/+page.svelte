@@ -13,3 +13,6 @@
     <li><a href={`/planner?course=${c.id}`}>{c.name}</a></li>
   {/each}
 </ul>
+
+<h1>Courses</h1>
+<p>Course directory placeholder.</p>

@@ -45,4 +45,8 @@ export function init3D(container, mode, courseData, keys) {
 
   console.log('3D planner initialized:', { mode, courseData });
   return viewer;
+export function init3D(container, mode, courseData, keys) {
+  console.log('init3D planner', { container, mode, courseData, keys });
+export function init3D(container, mode) {
+  console.log('init3D planner', container, mode);
 }
