@@ -1,4 +1,3 @@
-
 <script>
   import { onMount } from 'svelte';
   import Map2D from '$lib/components/Map2D.svelte';
@@ -36,6 +35,18 @@
 </script>
 
 <h1>Planner</h1>
+  <div class="toolbar">
+    <button on:click={() => viewMode = '2d'} class:active={viewMode==='2d'}>2D</button>
+    <button on:click={() => viewMode = '3d'} class:active={viewMode==='3d'}>3D</button>
+    <button on:click={() => dataMode = 'distance'} class:active={dataMode==='distance'}>Distance</button>
+    <button on:click={() => dataMode = 'dispersion'} class:active={dataMode==='dispersion'}>Dispersion</button>
+    <button on:click={() => drawerOpen = !drawerOpen}>Holes ▸</button>
+  </div>
+
+{#if viewMode === '2d'}
+  <Map2D {dataMode} {courseData} />
+{:else}
+  <Map3D {dataMode} {courseData} />
 <div class="controls">
   <button on:click={() => viewMode = '2d'} disabled={viewMode==='2d'}>2D</button>
   <button on:click={() => viewMode = '3d'} disabled={viewMode==='3d'}>3D</button>
@@ -53,6 +64,15 @@
 <Drawer open={drawerOpen}>
   {#if courseData}
     <h2>{courseData.name}</h2>
+    <ul>
+      {#each Array(courseData.holes) as _, i}
+        <li>Hole {i + 1}</li>
+      {/each}
+    </ul>
+    {#if weather}
+      <p>Wind: {weather.wind.speed} m/s 
+        <span style="display:inline-block; transform:rotate({weather.wind.deg}deg);">↑</span>
+      </p>
     {#if weather}
       <p>Wind: {weather.wind.speed} m/s ↑ <span style="display:inline-block; transform:rotate({weather.wind.deg}deg);">&#8593;</span></p>
     {/if}
@@ -60,6 +80,14 @@
 </Drawer>
 
 <style>
+.toolbar button {
+  margin-right: 0.5rem;
+}
+.toolbar button.active {
+  font-weight: bold;
+}
+</style>
+
 .controls button {
   margin-right: 0.5rem;
 }

@@ -2,6 +2,13 @@
   import { onMount } from 'svelte';
   import { initPlanner } from '$lib/legacy/2dplanner';
   let container;
+  export let dataMode = 'distance';
+  export let courseData = null;
+  onMount(() => {
+    let keys;
+    apiKeys.subscribe(k => (keys = k))();
+    initPlanner(container, dataMode, courseData, keys);
+  let container;
 
   export let dataMode = 'distance';
   onMount(() => {
@@ -17,7 +24,6 @@
 </script>
 
 <div bind:this={container} class="map2d">Loading map...</div>
-
 
 <style>
 .map2d {
