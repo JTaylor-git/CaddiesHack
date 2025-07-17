@@ -9,7 +9,6 @@
     unsub();
     if (!keys.mapbox || !keys.openweather || !keys.esri || !keys.opentopo) {
     apiKeys.subscribe(k => (keys = k))();
-    if (!keys.mapbox || !keys.openweather || !keys.esri) {
       modalOpen = true;
     }
   });

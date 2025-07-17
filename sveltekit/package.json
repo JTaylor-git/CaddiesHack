@@ -17,7 +17,8 @@
   "dependencies": {
     "chart.js": "^4.0.0",
     "chartjs-plugin-annotation": "^3.0.0",
-    "leaflet": "^1.9.4"
+    "leaflet": "^1.9.4",
+    "cesium": "^1.118.1"
   }
 
   ,

@@ -65,7 +65,6 @@
 
 <h1>Profile</h1>
 <form on:submit|preventDefault={updateChart}>
-
     chart = new Chart(canvas, {
       type: 'bar',
       data: {

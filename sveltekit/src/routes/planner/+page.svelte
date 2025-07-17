@@ -80,7 +80,6 @@
       </p>
     {#if weather}
       <p>Wind: {weather.wind.speed} m/s ↑ <span style="display:inline-block; transform:rotate({weather.wind.deg}deg);">&#8593;</span></p>
-
     {/if}
   {/if}
 </Drawer>
@@ -93,7 +92,7 @@
   font-weight: bold;
 }
 </style>
-
+=======
 .controls button {
   margin-right: 0.5rem;
 }
