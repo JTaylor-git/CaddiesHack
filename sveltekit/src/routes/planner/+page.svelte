@@ -47,6 +47,22 @@
   <Map2D {dataMode} {courseData} wind={weather ? weather.wind : null} />
 {:else}
   <Map3D {dataMode} {courseData} wind={weather ? weather.wind : null} />
+  <Map2D {dataMode} {courseData} />
+{:else}
+  <Map3D {dataMode} {courseData} />
+<div class="controls">
+  <button on:click={() => viewMode = '2d'} disabled={viewMode==='2d'}>2D</button>
+  <button on:click={() => viewMode = '3d'} disabled={viewMode==='3d'}>3D</button>
+  <button on:click={() => dataMode = 'distance'} disabled={dataMode==='distance'}>Distance</button>
+  <button on:click={() => dataMode = 'dispersion'} disabled={dataMode==='dispersion'}>Dispersion</button>
+  <button on:click={() => drawerOpen = !drawerOpen}>Details</button>
+</div>
+
+{#if viewMode === '2d'}
+  <Map2D {dataMode} />
+{:else}
+  <Map3D {dataMode} />
+
 {/if}
 
 <Drawer open={drawerOpen}>
@@ -59,6 +75,14 @@
     </ul>
     {#if weather}
       <p>Wind: {weather.wind.speed} m/s</p>
+
+
+      <p>Wind: {weather.wind.speed} m/s 
+        <span style="display:inline-block; transform:rotate({weather.wind.deg}deg);">↑</span>
+      </p>
+    {#if weather}
+      <p>Wind: {weather.wind.speed} m/s ↑ <span style="display:inline-block; transform:rotate({weather.wind.deg}deg);">&#8593;</span></p>
+
     {/if}
   {/if}
 </Drawer>
@@ -71,4 +95,22 @@
   font-weight: bold;
 }
 </style>
+
+.controls button {
+  margin-right: 0.5rem;
+}
+</style>
+
+
+
+<script>
+  import Map2D from '$lib/components/Map2D.svelte';
+</script>
+
+<h1>Planner</h1>
+<Map2D />
+
+
+<h1>Planner</h1>
+
 

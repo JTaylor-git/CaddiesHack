@@ -8,7 +8,9 @@
     const unsub = apiKeys.subscribe((k) => (keys = k));
     unsub();
     if (!keys.mapbox || !keys.openweather || !keys.esri || !keys.opentopo) {
-      modalOpen = true;
+
+    apiKeys.subscribe(k => (keys = k))();
+n = true;
     }
   });
 </script>
@@ -31,3 +33,11 @@ nav {
   background: #eee;
 }
 </style>
+
+<slot />
+<KeyModal bind:open={modalOpen} />
+</script>
+
+<slot />
+<KeyModal />
+

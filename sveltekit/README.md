@@ -9,6 +9,7 @@ OpenWeatherMap are saved in localStorage and prompted via a modal on first
 launch. A side drawer lists holes while the current wind arrow is overlaid on
 the map itself.
 
+
 ## Available Routes
 
 - `/planner` – unified 2D/3D planner
