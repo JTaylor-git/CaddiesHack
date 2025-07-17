@@ -6,6 +6,9 @@
   export let dataMode = 'distance';
   export let courseData = null;
   export let wind = null;
+  let container;
+  export let dataMode = 'distance';
+  export let courseData = null;
   onMount(() => {
     let keys;
     apiKeys.subscribe(k => (keys = k))();
@@ -19,6 +22,14 @@
     <div class="wind" style="transform: rotate({wind.deg}deg);">↑</div>
   {/if}
 </div>
+  let container;
+  export let dataMode = 'distance';
+  onMount(() => {
+    init3D(container, dataMode);
+  });
+</script>
+
+<div bind:this={container} class="map3d">Loading 3D map... ({dataMode})</div>
 
 <style>
 .map3d {

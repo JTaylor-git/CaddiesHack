@@ -2,6 +2,7 @@
   import { apiKeys } from '$lib/stores/apiKeys';
   export let open = false;
   let localKeys = { mapbox: '', openweather: '', esri: '', opentopo: '' };
+  let localKeys = { mapbox: '', openweather: '', esri: '' };
   apiKeys.subscribe(k => (localKeys = { ...k }));
   function save() {
     apiKeys.set(localKeys);
@@ -10,6 +11,20 @@
 </script>
 
 {#if open}
+  import { onMount } from 'svelte';
+  let localKeys = { mapbox: '', openweather: '', esri: '' };
+  let show = false;
+  const unsubscribe = apiKeys.subscribe(k => localKeys = { ...k });
+  onMount(() => {
+    if (!localKeys.mapbox) show = true;
+  });
+  function save() {
+    apiKeys.set(localKeys);
+    show = false;
+  }
+</script>
+
+{#if show}
 <div class="modal">
   <div class="dialog">
     <h2>Enter API Keys</h2>
