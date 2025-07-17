@@ -1,3 +1,4 @@
+
 <script>
   import { onMount } from 'svelte';
   import Map2D from '$lib/components/Map2D.svelte';
@@ -63,4 +64,16 @@
   margin-right: 0.5rem;
 }
 </style>
+
+
+
+<script>
+  import Map2D from '$lib/components/Map2D.svelte';
+</script>
+
+<h1>Planner</h1>
+<Map2D />
+
+
+<h1>Planner</h1>
 
